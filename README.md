@@ -74,6 +74,26 @@ Use the user selector in the header to simulate authentication.
 npm test
 ```
 
+## Vercel Deployment
+
+If deploying to Vercel, Prisma Client must be regenerated during install/build because Vercel caches dependencies.
+
+This project already handles that via:
+
+- `postinstall: prisma generate`
+- `build: prisma generate && next build`
+
+You should still make sure Vercel has:
+
+- `DATABASE_URL` configured
+- a database schema that matches the current Prisma schema
+
+If the deployed database is behind your local schema, run a schema sync before or during deployment:
+
+```bash
+npx prisma migrate deploy
+```
+
 ## Notes
 
 - Uploads are stored on the local filesystem in `/uploads`

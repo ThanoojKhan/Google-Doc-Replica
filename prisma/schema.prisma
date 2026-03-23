@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccessRole {
+  viewer
+  editor
+}
+
+model User {
+  id               String           @id @default(uuid())
+  email            String           @unique
+  name             String?
+  createdAt        DateTime         @default(now())
+  ownedDocuments   Document[]
+  documentAccesses DocumentAccess[]
+
+  @@index([email])
+}
+
+model Document {
+  id          String           @id @default(uuid())
+  title       String
+  content     Json
+  ownerId     String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  owner       User             @relation(fields: [ownerId], references: [id])
+  access      DocumentAccess[]
+  attachments Attachment[]
+
+  @@index([ownerId, updatedAt])
+}
+
+model DocumentAccess {
+  id         String     @id @default(uuid())
+  documentId String
+  userId     String
+  role       AccessRole
+
+  document   Document @relation(fields: [documentId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@unique([documentId, userId])
+  @@index([userId, documentId])
+}
+
+model Attachment {
+  id         String   @id @default(uuid())
+  documentId String
+  filename   String
+  path       String
+  uploadedAt DateTime @default(now())
+
+  document   Document @relation(fields: [documentId], references: [id])
+
+  @@index([documentId, uploadedAt])
+}

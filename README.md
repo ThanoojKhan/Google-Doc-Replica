@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Collaborative Editor
 
-## Getting Started
+A production-minded coding assignment slice for a lightweight collaborative document editor inspired by Google Docs.
 
-First, run the development server:
+## Features
+
+- Create, rename, edit, and persist rich-text documents with TipTap JSON content
+- Debounced autosave after 2 seconds
+- Import `.txt` and `.md` files into new documents and store the uploaded file locally in `/uploads`
+- Simulated user switching with seeded users
+- Share documents by email with `viewer` or `editor` access
+- Typed API routes backed by a service layer and Prisma/PostgreSQL
+- Zod validation and consistent JSON API responses
+- Jest coverage for `documentService.createDocument()`
+
+## Stack
+
+- Next.js App Router
+- TypeScript
+- PostgreSQL
+- Prisma ORM
+- Tailwind CSS
+- TipTap
+- Zod
+- Jest
+
+## Architecture
+
+The app follows this flow throughout the product:
+
+`UI -> API Route -> Service Layer -> Prisma -> PostgreSQL`
+
+The UI never talks directly to the database.
+
+## Local Setup
 
 ```bash
+npm install
+cp .env.example .env
+npx prisma migrate dev
+npx prisma db seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Seeded Users
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `user1@example.com`
+- `user2@example.com`
 
-## Learn More
+Use the user selector in the header to simulate authentication.
 
-To learn more about Next.js, take a look at the following resources:
+## Key Routes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `/documents`
+- `/documents/new`
+- `/documents/[id]`
+- `/shared`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## API Routes
 
-## Deploy on Vercel
+- `GET /api/documents`
+- `POST /api/documents`
+- `GET /api/documents/:id`
+- `PUT /api/documents/:id`
+- `POST /api/upload`
+- `POST /api/share`
+- `GET /api/users`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Testing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm test
+```
+
+## Notes
+
+- Uploads are stored on the local filesystem in `/uploads`
+- Supported imports are `.txt` and `.md`
+- Real auth, realtime collaboration, and advanced permissions are intentionally out of scope for this assignment

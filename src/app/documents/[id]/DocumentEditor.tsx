@@ -173,7 +173,7 @@ export default function DocumentEditor({ documentId }: DocumentEditorProps) {
 
     if (isLoading) {
         return (
-            <div className="surface rounded-[28px] px-5 py-12 text-center text-sm text-[var(--muted)]">
+            <div className="surface rounded-4xl px-5 py-12 text-center text-sm text-[var(--muted)]">
                 Loading document...
             </div>
         );
@@ -189,11 +189,11 @@ export default function DocumentEditor({ documentId }: DocumentEditorProps) {
 
     return (
         <div className="space-y-6">
-            <section className="surface rounded-[28px] px-5 py-5 sm:px-6">
+            <section className="editorial-card px-5 py-5 sm:px-6">
                 <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
                     <div className="min-w-0 flex-1 space-y-4">
                         <div className="flex flex-wrap items-center gap-3">
-                            <span className="rounded-full bg-white px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-[var(--muted)]">
+                            <span className="status-chip status-chip--soft">
                                 {document.role === "owner" ? "Owner" : document.role}
                             </span>
                             <span className="text-sm text-[var(--muted)]">
@@ -208,7 +208,7 @@ export default function DocumentEditor({ documentId }: DocumentEditorProps) {
                                 onChange={(event) => setTitle(event.target.value)}
                                 onBlur={handleTitleBlur}
                                 disabled={!document.canEdit}
-                                className="w-full rounded-2xl border border-[var(--border)] bg-white px-4 py-3 text-3xl font-semibold tracking-tight outline-none transition focus:border-[var(--accent)] disabled:cursor-not-allowed disabled:bg-white/70"
+                                className="field-shell text-3xl font-semibold tracking-tight disabled:cursor-not-allowed disabled:bg-white/70"
                             />
 
                             <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--muted)]">
@@ -246,7 +246,7 @@ export default function DocumentEditor({ documentId }: DocumentEditorProps) {
                         <FileUpload onUploaded={(newDocumentId) => router.push(`/documents/${newDocumentId}`)} />
 
                         {document.attachments.length > 0 ? (
-                            <div className="surface-strong rounded-2xl px-4 py-3">
+                            <div className="surface-strong rounded-3xl px-4 py-3">
                                 <p className="text-sm font-medium">Imported files</p>
                                 <ul className="mt-2 space-y-2 text-sm text-[var(--muted)]">
                                     {document.attachments.map((attachment) => (
@@ -268,7 +268,7 @@ export default function DocumentEditor({ documentId }: DocumentEditorProps) {
                 </div>
             ) : null}
 
-            <section className="surface rounded-[28px] p-3 sm:p-4">
+            <section className="editorial-card p-3 sm:p-4">
                 <Editor
                     content={
                         typeof document.content === "object" && document.content

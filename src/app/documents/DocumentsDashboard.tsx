@@ -98,29 +98,58 @@ export default function DocumentsDashboard({ initialFilter = "all" }: DashboardP
 
     return (
         <div className="space-y-6">
-            <section className="surface rounded-[28px] px-5 py-5 sm:px-6">
-                <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                    <div className="space-y-2">
-                        <p className="text-sm font-medium uppercase tracking-[0.25em] text-[var(--muted)]">
-                            Workspace
-                        </p>
-                        <h1 className="text-3xl font-semibold tracking-tight">
-                            {initialFilter === "shared" ? "Shared documents" : "Document dashboard"}
-                        </h1>
-                        <p className="max-w-2xl text-sm text-[var(--muted)]">
-                            Keep the product slice focused: create documents, edit rich text, import
-                            files, and manage sharing through a clean service-driven architecture.
-                        </p>
+            <section className="editorial-card px-5 py-5 sm:px-6 sm:py-6">
+                <div className="grid gap-6 xl:grid-cols-[1.25fr_0.95fr]">
+                    <div className="space-y-4">
+                        <p className="section-kicker text-[var(--accent)]">Workspace pulse</p>
+                        <div className="space-y-3">
+                            <h1 className="max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl">
+                                {initialFilter === "shared"
+                                    ? "Shared documents arranged like a reading desk"
+                                    : "A quieter document dashboard with editorial structure"}
+                            </h1>
+                            <p className="max-w-2xl text-sm leading-6 text-[var(--muted)] sm:text-base">
+                                Browse what you own, jump into shared work and start new drafts in
+                                a layout shaped more by publishing and archives than AI product pages.
+                            </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-3">
+                            <Link href="/documents/new" className="pill-button">
+                                New Document
+                            </Link>
+                            <FileUpload onUploaded={(documentId) => router.push(`/documents/${documentId}`)} />
+                        </div>
                     </div>
 
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                        <FileUpload onUploaded={(documentId) => router.push(`/documents/${documentId}`)} />
-                        <Link
-                            href="/documents/new"
-                            className="rounded-full bg-[var(--accent)] px-4 py-2 text-center text-sm font-medium text-white transition hover:bg-[var(--accent-strong)]"
-                        >
-                            New Document
-                        </Link>
+                    <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
+                        <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
+                            <p className="text-xs uppercase tracking-[0.22em] text-[var(--muted)]">
+                                Owned
+                            </p>
+                            <p className="mt-2 text-3xl font-semibold tracking-tight">
+                                {documents.ownedDocuments.length}
+                            </p>
+                            <p className="mt-1 text-sm text-[var(--muted)]">Editable by you</p>
+                        </div>
+                        <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
+                            <p className="text-xs uppercase tracking-[0.22em] text-[var(--muted)]">
+                                Shared
+                            </p>
+                            <p className="mt-2 text-3xl font-semibold tracking-tight">
+                                {documents.sharedDocuments.length}
+                            </p>
+                            <p className="mt-1 text-sm text-[var(--muted)]">Incoming from teammates</p>
+                        </div>
+                        <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
+                            <p className="text-xs uppercase tracking-[0.22em] text-[var(--muted)]">
+                                Filter
+                            </p>
+                            <p className="mt-2 text-lg font-semibold tracking-tight">
+                                {initialFilter === "shared" ? "Shared only" : "All activity"}
+                            </p>
+                            <p className="mt-1 text-sm text-[var(--muted)]">Switch views from the header</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -132,7 +161,7 @@ export default function DocumentsDashboard({ initialFilter = "all" }: DashboardP
             ) : null}
 
             {isLoading ? (
-                <div className="surface rounded-[28px] px-5 py-10 text-center text-sm text-[var(--muted)]">
+                <div className="editorial-card px-5 py-10 text-center text-sm text-[var(--muted)]">
                     Loading documents...
                 </div>
             ) : (

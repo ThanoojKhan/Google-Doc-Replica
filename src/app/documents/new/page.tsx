@@ -46,29 +46,31 @@ export default function NewDocumentPage() {
 
     return (
         <div className="mx-auto max-w-3xl space-y-6">
-            <section className="surface rounded-[28px] px-5 py-6 sm:px-6">
-                <div className="space-y-2">
-                    <p className="text-sm font-medium uppercase tracking-[0.25em] text-[var(--muted)]">
+            <section className="editorial-card px-5 py-6 sm:px-6">
+                <div className="space-y-3">
+                    <p className="section-kicker text-[var(--accent)]">
                         New document
                     </p>
-                    <h1 className="text-3xl font-semibold tracking-tight">Start a fresh draft</h1>
-                    <p className="text-sm text-[var(--muted)]">
-                        Keep it lightweight: create an empty document or import a supported text file
-                        to bootstrap the editor with content.
+                    <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                        Start a fresh draft with a cleaner desk
+                    </h1>
+                    <p className="text-sm leading-6 text-[var(--muted)]">
+                        Create a blank document or import Markdown or text files into a calmer,
+                        more reference-driven workspace.
                     </p>
                 </div>
             </section>
 
-            <section className="surface rounded-[28px] px-5 py-6 sm:px-6">
+            <section className="editorial-card px-5 py-6 sm:px-6">
                 <div className="space-y-5">
                     <label className="block space-y-2">
-                        <span className="text-sm font-medium">Document title</span>
+                        <span className="text-sm font-semibold">Document title</span>
                         <input
                             type="text"
                             placeholder="Quarterly planning notes"
                             value={title}
                             onChange={(event) => setTitle(event.target.value)}
-                            className="w-full rounded-2xl border border-[var(--border)] bg-white px-4 py-3 outline-none transition focus:border-[var(--accent)]"
+                            className="field-shell"
                         />
                     </label>
 
@@ -83,7 +85,7 @@ export default function NewDocumentPage() {
                             type="button"
                             onClick={createDocument}
                             disabled={isSubmitting}
-                            className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
+                            className="pill-button disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             {isSubmitting ? "Creating..." : "Create document"}
                         </button>

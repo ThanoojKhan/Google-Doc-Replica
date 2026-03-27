@@ -39,8 +39,8 @@ function ToolbarButton({
             disabled={disabled}
             className={`rounded-full border px-3 py-1.5 text-sm transition ${
                 isActive
-                    ? "border-[var(--accent)] bg-[var(--accent)] text-white"
-                    : "border-[var(--border)] bg-white text-[var(--text)] hover:border-[var(--accent)]"
+                    ? "border-[var(--accent)] bg-[linear-gradient(135deg,var(--accent),var(--accent-strong))] text-white shadow-[var(--shadow-soft)]"
+                    : "border-[var(--border)] bg-white text-[var(--text)] hover:border-[var(--accent)] hover:text-[var(--accent)]"
             } disabled:cursor-not-allowed disabled:opacity-50`}
         >
             {label}
@@ -77,7 +77,7 @@ export default function Editor({ content, editable = true, onChange }: EditorPro
         ],
         editorProps: {
             attributes: {
-                class: "prose-editor rounded-[24px] bg-white px-5 py-5 focus:outline-none",
+                class: "prose-editor rounded-3xl bg-white px-5 py-5 focus:outline-none",
             },
         },
         onUpdate({ editor: nextEditor }) {
@@ -162,7 +162,7 @@ export default function Editor({ content, editable = true, onChange }: EditorPro
                 />
             </div>
 
-            <div className="rounded-[24px] border border-[var(--border)] bg-white">
+            <div className="rounded-4xl border border-[var(--border)] bg-[var(--surface-strong)] p-2 shadow-[var(--shadow-soft)]">
                 <EditorContent editor={editor} />
             </div>
         </div>

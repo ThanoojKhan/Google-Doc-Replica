@@ -65,7 +65,7 @@ export default function ShareDialog({
                 <button
                     type="button"
                     onClick={() => setIsOpen((current) => !current)}
-                    className="rounded-full border border-[var(--border)] px-3 py-1 text-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                    className="secondary-button px-3 py-1"
                 >
                     {isOpen ? "Hide" : "Open"}
                 </button>
@@ -79,12 +79,12 @@ export default function ShareDialog({
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
                             placeholder="user2@example.com"
-                            className="w-full rounded-2xl border border-[var(--border)] bg-white px-4 py-3 outline-none transition focus:border-[var(--accent)]"
+                            className="field-shell"
                         />
                         <select
                             value={role}
                             onChange={(event) => setRole(event.target.value as "viewer" | "editor")}
-                            className="w-full rounded-2xl border border-[var(--border)] bg-white px-4 py-3 outline-none transition focus:border-[var(--accent)]"
+                            className="field-shell"
                         >
                             <option value="viewer">Viewer</option>
                             <option value="editor">Editor</option>
@@ -93,7 +93,7 @@ export default function ShareDialog({
                             type="button"
                             onClick={handleShare}
                             disabled={isSubmitting}
-                            className="w-full rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white transition hover:bg-[var(--accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
+                            className="pill-button w-full disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             {isSubmitting ? "Sharing..." : "Share"}
                         </button>
@@ -118,7 +118,7 @@ export default function ShareDialog({
                                         <span>
                                             {user.name ?? user.email} ({user.email})
                                         </span>
-                                        <span className="rounded-full bg-white px-2 py-1 text-xs uppercase tracking-[0.16em]">
+                                        <span className="status-chip status-chip--soft">
                                             {user.role}
                                         </span>
                                     </li>

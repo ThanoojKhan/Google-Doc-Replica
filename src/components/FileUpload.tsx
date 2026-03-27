@@ -66,7 +66,7 @@ export default function FileUpload({ onUploaded }: FileUploadProps) {
 
             <label
                 htmlFor={inputId}
-                className="inline-flex cursor-pointer items-center justify-center rounded-full border border-[var(--border)] bg-white px-4 py-2 text-sm font-medium transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                className="secondary-button cursor-pointer"
             >
                 {isUploading ? "Uploading..." : "Import .txt or .md"}
             </label>

@@ -50,12 +50,15 @@ export default function UserSelector() {
     };
 
     return (
-        <div className="flex items-center gap-3">
-            <span className="text-sm font-medium text-[var(--muted)]">Viewing as</span>
+        <div className="w-full max-w-md rounded-4xl border border-[var(--border)] bg-[var(--surface)] p-4">
+            <div className="mb-3 flex items-center justify-between gap-3">
+                <span className="section-kicker text-[var(--muted)]">Viewing as</span>
+                {isPending ? <span className="text-xs text-[var(--muted)]">Refreshing...</span> : null}
+            </div>
             <select
                 value={selectedUserId}
                 onChange={(event) => changeUser(event.target.value)}
-                className="rounded-full border border-[var(--border)] bg-white px-4 py-2 text-sm outline-none transition focus:border-[var(--accent)]"
+                className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm font-medium text-[var(--text)] outline-none transition focus:border-[var(--accent)]"
             >
                 {users.map((user) => (
                     <option key={user.id} value={user.id}>
@@ -63,7 +66,6 @@ export default function UserSelector() {
                     </option>
                 ))}
             </select>
-            {isPending ? <span className="text-xs text-[var(--muted)]">Refreshing...</span> : null}
         </div>
     );
 }

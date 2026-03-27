@@ -17,7 +17,7 @@ function RoleBadge({ role }: { role: DocumentListItem["role"] }) {
     const label = role === "owner" ? "Owner" : role === "editor" ? "Editor" : "Viewer";
 
     return (
-        <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium uppercase tracking-[0.16em] text-[var(--muted)]">
+        <span className="status-chip status-chip--soft">
             {label}
         </span>
     );
@@ -32,7 +32,7 @@ export default function DocumentList({
     onShared,
 }: DocumentListProps) {
     return (
-        <section className="surface rounded-[28px] px-5 py-5 sm:px-6">
+        <section className="editorial-card px-5 py-5 sm:px-6">
             <div className="space-y-2">
                 <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
                 <p className="text-sm text-[var(--muted)]">{description}</p>
@@ -45,13 +45,16 @@ export default function DocumentList({
             ) : (
                 <div className="mt-5 space-y-4">
                     {documents.map((document) => (
-                        <article key={document.id} className="surface-strong rounded-[24px] px-4 py-4">
+                        <article
+                            key={document.id}
+                            className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 shadow-[var(--shadow-soft)]"
+                        >
                             <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
                                 <div className="min-w-0 flex-1 space-y-3">
                                     <div className="flex flex-wrap items-center gap-2">
                                         <RoleBadge role={document.role} />
                                         {document.attachmentCount > 0 ? (
-                                            <span className="text-xs font-medium uppercase tracking-[0.16em] text-[var(--muted)]">
+                                            <span className="status-chip bg-[#ece2d6] text-[#8a5b32]">
                                                 {document.attachmentCount} attachment
                                                 {document.attachmentCount === 1 ? "" : "s"}
                                             </span>
@@ -61,7 +64,7 @@ export default function DocumentList({
                                     <div>
                                         <Link
                                             href={`/documents/${document.id}`}
-                                            className="text-lg font-semibold tracking-tight transition hover:text-[var(--accent)]"
+                                            className="text-xl font-semibold tracking-tight transition hover:text-[var(--accent)]"
                                         >
                                             {document.title}
                                         </Link>
@@ -78,7 +81,7 @@ export default function DocumentList({
                                 <div className="flex w-full flex-col gap-3 xl:w-[280px]">
                                     <Link
                                         href={`/documents/${document.id}`}
-                                        className="rounded-full border border-[var(--border)] px-4 py-2 text-center text-sm font-medium transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                                        className="secondary-button"
                                     >
                                         Open
                                     </Link>
@@ -87,7 +90,7 @@ export default function DocumentList({
                                         <button
                                             type="button"
                                             onClick={() => void onRename(document.id, document.title)}
-                                            className="rounded-full border border-[var(--border)] px-4 py-2 text-sm font-medium transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                                            className="secondary-button"
                                         >
                                             Rename
                                         </button>
